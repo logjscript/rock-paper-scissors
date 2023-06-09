@@ -1,9 +1,14 @@
 let playerGuess;
 
 function playerSelection() {
-    playerGuess = prompt("Choose Rock, Paper, or Scissors!");
-    playerGuess = playerGuess.toLowerCase();
+    playerGuess = prompt("Choose Rock, Paper, or Scissors.");
 
+    while (playerGuess == null) {
+        playerGuess = prompt("Please choose Rock, Paper, or Scissors!");
+    }
+
+    playerGuess = playerGuess.toLowerCase();
+    
     while (
         playerGuess !== "rock" &&
         playerGuess !== "paper" && 
@@ -16,18 +21,35 @@ function playerSelection() {
     return playerGuess;
 }
 
-playerSelection();
-
 let computerGuess;
 
 function computerSelection() {
-    let computerGuess = Math.random()
+    const computerRandom = Math.random();
 
-    if (computerGuess < .33) {
-        return "rock";
-    } else if (computerGuess < .66) {
-        return "paper";
+    if (computerRandom < .33) {
+        computerGuess = "rock";
+    } else if (computerRandom < .66) {
+        computerGuess = "paper";
     } else {
-        return "scissors";
+        computerGuess = "scissors";
     }
 }
+
+function playRound(playerGuess, computerGuess) {
+    if (
+        playerGuess === computerGuess
+    ) {
+        console.log("It's a tie!");
+
+    } else if (
+        playerGuess === "rock" && computerGuess === "scissors" ||
+        playerGuess === "paper" && computerGuess === "rock" ||
+        playerGuess === "scissors" && computerGuess === "paper"
+    ) {
+            console.log("You Won!");
+    } else {
+        console.log("Computer Won!");
+    }
+}
+
+
