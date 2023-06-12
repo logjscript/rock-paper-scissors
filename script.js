@@ -1,41 +1,43 @@
 let playerGuess;
+let computerGuess;
 
 function playerSelection() {
-    playerGuess = prompt("Choose Rock, Paper, or Scissors.");
+    let guess = prompt("Choose Rock, Paper, or Scissors.");
 
-    while (playerGuess == null) {
-        playerGuess = prompt("Please choose Rock, Paper, or Scissors!");
+    while (guess == null) {
+        return guess = prompt("Please choose Rock, Paper, or Scissors!");
     }
 
-    playerGuess = playerGuess.toLowerCase();
+        guess = guess.toLowerCase();
     
     while (
-        playerGuess !== "rock" &&
-        playerGuess !== "paper" && 
-        playerGuess !== "scissors"
+        guess !== "rock" &&
+        guess !== "paper" && 
+        guess !== "scissors"
     ) {
-        playerGuess = prompt("Invalid guess. Please guess again.");
-        playerGuess = playerGuess.toLowerCase();
-    }
-
-    return playerGuess;
+        guess = prompt("Invalid guess. Please guess again.");
 }
-
-let computerGuess;
+        return guess;
+}
 
 function computerSelection() {
     const computerRandom = Math.random();
-
+    let guess;
+    console.log(computerRandom);
     if (computerRandom < .33) {
-        computerGuess = "rock";
+        return guess = "rock";
     } else if (computerRandom < .66) {
-        computerGuess = "paper";
+        return guess = "paper";
     } else {
-        computerGuess = "scissors";
+        return guess = "scissors";
     }
 }
 
+
 function playRound(playerGuess, computerGuess) {
+    playerGuess = playerSelection();
+    computerGuess = computerSelection();
+
     if (
         playerGuess === computerGuess
     ) {
@@ -46,10 +48,35 @@ function playRound(playerGuess, computerGuess) {
         playerGuess === "paper" && computerGuess === "rock" ||
         playerGuess === "scissors" && computerGuess === "paper"
     ) {
-            console.log("You Won!");
+        console.log("You Won!");
+        return ++playerCount;
     } else {
         console.log("Computer Won!");
+        return ++computerCount;
     }
 }
 
+let playerCount = 0;
 
+let computerCount = 0;
+
+function finalScore(playerCount, computerCount) {
+    if (playerCount === computerCount) {
+        console.log("The final score of the game is a tie!");
+    } else if (playerCount > computerCount) {
+        console.log("You won the game!");
+    } else {
+        console.log("You lost the game!");
+    }
+}
+
+function fullGame() {
+
+    for (let i = 0; i < 5; i++) {
+        playRound();
+    }
+
+    finalScore(playerCount, computerCount);
+}
+
+fullGame();
