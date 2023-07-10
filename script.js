@@ -1,28 +1,43 @@
-let playerGuess;
-let computerGuess;
+const btnRock = document.createElement('button');
+const btnPaper = document.createElement('button');
+const btnScissors = document.createElement('button');
+const parentElement = document.querySelector('.container');
 
-function playerSelection() {
-    let guess = prompt("Choose Rock, Paper, or Scissors.");
+btnRock.textContent = 'rock';
+parentElement.appendChild(btnRock);
 
-    while (guess == null) {
-        return guess = prompt("Please choose Rock, Paper, or Scissors!");
+btnPaper.textContent = 'paper';
+parentElement.appendChild(btnPaper);
+
+btnScissors.textContent = 'scissors';
+parentElement.appendChild(btnScissors);
+
+btnRock.addEventListener("click", btnClick);
+btnPaper.addEventListener("click", btnClick);
+btnScissors.addEventListener("click", btnClick);
+
+let btnClickResult;
+let roundCount = 0;
+
+function btnClick(e) {
+    if (roundCount < 5) {
+    btnClickResult = e.target.textContent;
+    playRound(btnClickResult, computerSelection());
+    roundCount++;
     }
 
-        guess = guess.toLowerCase();
+    if (roundCount === 5) {
+        return finalScore(playerCount, computerCount);
+    }
+
     
-    while (
-        guess !== "rock" &&
-        guess !== "paper" && 
-        guess !== "scissors"
-    ) {
-        guess = prompt("Invalid guess. Please guess again.");
 }
-        return guess;
-}
+
+let computerGuess;
 
 function computerSelection() {
     const computerRandom = Math.random();
-    let guess;
+    let guess = computerGuess;
     console.log(computerRandom);
     if (computerRandom < .33) {
         return guess = "rock";
@@ -35,8 +50,7 @@ function computerSelection() {
 
 
 function playRound(playerGuess, computerGuess) {
-    playerGuess = playerSelection();
-    computerGuess = computerSelection();
+    playerGuess = btnClickResult;
 
     if (
         playerGuess === computerGuess
@@ -69,14 +83,3 @@ function finalScore(playerCount, computerCount) {
         console.log("You lost the game!");
     }
 }
-
-function fullGame() {
-
-    for (let i = 0; i < 5; i++) {
-        playRound();
-    }
-
-    finalScore(playerCount, computerCount);
-}
-
-fullGame();
